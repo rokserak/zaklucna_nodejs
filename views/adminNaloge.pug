@@ -1,0 +1,19 @@
+doctype html
+html(ng-app="app")
+    head
+        meta(charset="ISO-8859-1")
+        title naloge
+        script(type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js')
+        script(type="text/javascript" src="javascript/angularKoda.js")
+    body(ng-contoller="demoController")
+        table(border="1")
+            tr
+                th id
+                th navodila
+                th pike
+                th vrsta
+            tr(ng-repeat="nal in naloge")
+                td {{nal.idnaloge}}
+                td {{nal.navodila}}
+                td {{nal.pike}}
+                td {{nal.tipNaloge}}
