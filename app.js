@@ -301,6 +301,40 @@ app.post('/python', function(req, res){
   
   });
 
+  app.post('/shraniTest', function(req, res){
+    var navodila1 = req.body.nal1;
+    var navodila2 = req.body.nal2;
+    var navodila3 = req.body.nal3;
+    var navodila4 = req.body.nal4;
+    var koda1 = req.body.koda1;
+    var koda2 = req.body.koda2;
+    var koda3 = req.body.koda3;
+    var koda4 = req.body.koda4;
+
+    const con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "usbw",
+      database: "baza"
+      });
+
+      con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      //console.log(document.getElementById("username").value);
+      const podatki = req.body;
+      //console.log(podatki);
+      var sql = "INSERT INTO `testi1`(`user`, `navodila1`, `koda1`, `navodila2`, `koda2`, `navodila3`, `koda3`, `navodila4`, `koda4`) VALUES (" + "'ostro'" + ", '" + navodila1 + "', '" + koda1 + "', '" + navodila2 + "', '" + koda2 + "', '" + navodila3 + "', '" + koda3 + "', '" + navodila4 + "', '" + koda4 + "')";
+      console.log(sql);
+      con.query(sql, function (err, result) {
+          if (err) throw err;
+      console.log("1 record inserted");
+  });
+ // window.location.href= 'htttp://localhost:3000/index.html';
+
+  });
+  });
+
 app.listen(3000);
 
 /*

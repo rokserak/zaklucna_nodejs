@@ -57,7 +57,7 @@
             
             <div class="row">
                 <div class="col">
-                    <h3>{{naloge[0].navodila}}</h3>
+                    <h3 id="navodila1">{{naloge[0].navodila}}</h3>
                 </div>
                 <div class="col">
                     <p>tocke: {{naloge[0].pike}}</p>
@@ -75,7 +75,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h3>{{naloge[1].navodila}}</h3>
+                    <h3 id="navodila2">{{naloge[1].navodila}}</h3>
                 </div>
                 <div class="col">
                     <p>tocke: {{naloge[1].pike}}</p>
@@ -93,7 +93,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <h3>{{naloge[2].navodila}}</h3>
+                    <h3 id="navodila3">{{naloge[2].navodila}}</h3>
                 </div>
                 <div class="col">
                     <p>tocke: {{naloge[2].pike}}</p>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h3>{{naloge[3].navodila}}</h3>
+                        <h3 id="navodila4">{{naloge[3].navodila}}</h3>
                     </div>
                     <div class="col">
                         <p>tocke: {{naloge[3].pike}}</p>
@@ -143,7 +143,7 @@
             
 
             var editor0 = ace.edit("editor0");
-            editor0.setTheme("ace/theme/monokai");
+            editor0.setTheme("ace/theme/dracula");
             editor0.session.setMode("ace/mode/python");
 
             var editor1 = ace.edit("editor1");
@@ -151,12 +151,14 @@
             editor1.session.setMode("ace/mode/python");
 
             var editor2 = ace.edit("editor2");
-            editor2.setTheme("ace/theme/monokai");
+            editor2.setTheme("ace/theme/dracula");
             editor2.session.setMode("ace/mode/python");
 
             var editor3 = ace.edit("editor3");
             editor3.setTheme("ace/theme/monokai");
             editor3.session.setMode("ace/mode/python");
+
+            
         </script>
         <script src="javascript/jquery-3.3.1.min.js"></script>
         <script>
@@ -230,24 +232,32 @@
 
 
             //shrani naloge v bazo
-            /*
+            
             $('#shrani').on('click', function(){
                 $.ajax({
                     url: '/shraniTest',
                     data: {
-                        nal1: ,
-                        nal2: ,
-                        nal3: ,
-                        nal4: ,
-                        koda1: ,
-                        koda2: ,
-                        koda3: ,
-                        koda4: ,
-                        kon 
+                        nal1: $('#navodila1').text(),
+                        nal2: $('#navodila2').text(),
+                        nal3: $('#navodila3').text(),
+                        nal4: $('#navodila4').text(),
+                        koda1: editor0.getValue(),
+                        koda2: editor1.getValue(),
+                        koda3: editor2.getValue(),
+                        koda4: editor3.getValue(),
+                        koncal: 0 
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data){
+                        console.log('dela!!!');
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
                     },
                 })
             });
-            */
+            
         </script>
     </body>
 </html>
