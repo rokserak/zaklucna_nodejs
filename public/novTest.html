@@ -69,7 +69,8 @@
                     </div>                           
                 </div>
                 <div class="col">
-                    izpis
+                    <button id="poslji0">run</button>
+                    <p id="resitev0">izpis</p>
                 </div>
             </div>
             <div class="row">
@@ -86,7 +87,8 @@
                     </div>                           
                 </div>
                 <div class="col">
-                    izpis
+                    <button id="poslji1">run</button>
+                    <p id="resitev1">izpis</p>
                 </div>
             </div>
             <div class="row">
@@ -103,7 +105,8 @@
                         </div>                           
                     </div>
                     <div class="col">
-                        izpis
+                        <button id="poslji2">run</button>
+                        <p id="resitev2">izpis</p>
                     </div>
                 </div>
                 <div class="row">
@@ -120,16 +123,17 @@
                         </div>                           
                     </div>
                     <div class="col">
-                        izpis
+                        <button id="poslji3">run</button>
+                        <p id="resitev3">izpis</p>
                     </div>
                 </div>
 
             <div class="row my-5">
                 <div class="col">
-                    <button>shrani</button>
+                    <button id="shrani">shrani</button>
                 </div>
                 <div class="col">
-                    <button>oddaj</button>
+                    <button id="oddaj">oddaj</button>
                 </div>
             </div>
             
@@ -153,6 +157,97 @@
             var editor3 = ace.edit("editor3");
             editor3.setTheme("ace/theme/monokai");
             editor3.session.setMode("ace/mode/python");
+        </script>
+        <script src="javascript/jquery-3.3.1.min.js"></script>
+        <script>
+            $('#poslji0').on('click', function(){
+                $.ajax({
+                    url: '/python',
+                    data: {data: editor0.getValue() },
+                    type: 'POST',
+                    dataType: 'json',
+                    jsonpCallback: 'callback',
+                    success: function(data){
+                        console.log(data);
+                        $('#resitev0').text(data.data);
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('#poslji1').on('click', function(){
+                $.ajax({
+                    url: '/python',
+                    data: {data: editor1.getValue() },
+                    type: 'POST',
+                    dataType: 'json',
+                    jsonpCallback: 'callback',
+                    success: function(data){
+                        console.log(data);
+                        $('#resitev1').text(data.data);
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('#poslji2').on('click', function(){
+                $.ajax({
+                    url: '/python',
+                    data: {data: editor2.getValue() },
+                    type: 'POST',
+                    dataType: 'json',
+                    jsonpCallback: 'callback',
+                    success: function(data){
+                        console.log(data);
+                        $('#resitev2').text(data.data);
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    },
+                });
+            });
+
+            $('#poslji3').on('click', function(){
+                $.ajax({
+                    url: '/python',
+                    data: {data: editor3.getValue() },
+                    type: 'POST',
+                    dataType: 'json',
+                    jsonpCallback: 'callback',
+                    success: function(data){
+                        console.log(data);
+                        $('#resitev3').text(data.data);
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    },
+                });
+            });
+
+
+            //shrani naloge v bazo
+            /*
+            $('#shrani').on('click', function(){
+                $.ajax({
+                    url: '/shraniTest',
+                    data: {
+                        nal1: ,
+                        nal2: ,
+                        nal3: ,
+                        nal4: ,
+                        koda1: ,
+                        koda2: ,
+                        koda3: ,
+                        koda4: ,
+                        kon 
+                    },
+                })
+            });
+            */
         </script>
     </body>
 </html>

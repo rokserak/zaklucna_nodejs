@@ -20,8 +20,10 @@
     "assert": "^1.4.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "fs": "0.0.1-security",
     "mysql": "^2.15.0",
     "pug": "^2.0.0-rc.4",
-    "python-bridge": "^1.0.3"
+    "python-bridge": "^1.0.3",
+    "python-shell": "^0.5.0"
   }
 }

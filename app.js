@@ -24,10 +24,107 @@ let pythonBridge = require('python-bridge');
  
 let python = pythonBridge();
 
+var PythonShell = require('python-shell');
 
+/*
 app.get('/', function (req, res) {
     res.render('test');
   });
+*/
+
+app.get('/', function (req, res) {
+  res.sendfile('register.html');
+});
+app.get('/login', function (req, res) {
+  res.sendfile('login.html');
+});
+
+//  app.post('/index.html', function (req, res) {
+//    res.sendfile('index.html');
+//  });
+
+app.post('/login.html', function (req, res){
+  
+  const con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "usbw",
+      database: "baza"
+      });
+
+      con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      //console.log(document.getElementById("username").value);
+      const podatki = req.body;
+      //console.log(podatki);
+      var sql = "INSERT INTO uporabniki (username, password) VALUES ('"+podatki.username+"',"+ "'"+podatki.password+"')";
+      console.log(sql);
+      con.query(sql, function (err, result) {
+          if (err) throw err;
+      console.log("1 record inserted");
+  });
+ // window.location.href= 'htttp://localhost:3000/index.html';
+
+  });
+
+  res.sendfile('login.html');
+
+  
+});
+
+
+app.post('/upisan.html', function (req, res){
+  
+  const con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "usbw",
+      database: "baza"
+      });
+
+      con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+      //console.log(document.getElementById("username").value);
+      const podatki = req.body;
+      //console.log(podatki);
+      var sql = "SELECT * FROM `uporabniki`";
+      //console.log(sql);
+      con.query(sql, function (err, result) {
+          if (err) throw err;
+          //console.log(JSON.stringify(result));
+          //console.log(result);
+         
+          //console.log(result[0].username);
+      var load = 0;
+      for(i=0;i<result.length;i++){
+          var ime = result[i].username;
+          var pass = result[i].password;
+      if(ime==podatki.username && pass==podatki.password){
+          res.sendfile('./izberi.html');
+          load=1;
+          break;
+      }
+      else{
+          console.log("napacno geslo ali ime");
+          
+          
+      
+
+      }
+  }
+  if(load==0){
+      res.sendfile('login.html');
+  }
+
+  });
+ 
+  });
+
+ 
+  
+});
 
 app.get('/adminNaloge', function(req, res){
     res.sendfile('./public/adminNaloge.html');
@@ -168,8 +265,28 @@ app.get('/nadaljujTest', function(req, res){
   });
 });
 
+var fs = require('fs');
 
 app.post('/python', function(req, res){
+  fs.writeFile("my_script.py", req.body.data, function(err) {
+    if(err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+  }); 
+
+  PythonShell.run('my_script.py', function (err, results) {
+    if (err) throw err;
+    // results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
+    res.send({data: results});
+  });
+
+
+
+
+  /*
     let koda = req.body.data.substring(0, req.body.data.lastIndexOf('\n'));
     let klic = req.body.data.substring(req.body.data.lastIndexOf('\n')+1);
   
@@ -179,6 +296,8 @@ app.post('/python', function(req, res){
       return 1
   `;
   python`atomic()`.then(x => res.send({data: x}));
+
+  */
   
   });
 
