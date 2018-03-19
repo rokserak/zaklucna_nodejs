@@ -4,10 +4,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="javascript/angular.min.js"></script>
         <script>
+            var angularBridge = {};
             var app = angular.module("app", []);
             app.controller("demoController", function($scope, $http){
                 $http.get("http://localhost:3000/nalogeTest").then(function(data) {
                     console.log('dela');
+                    angularBridge.$podatki = $scope;
                     $scope.naloge = data.data;
                 });
             });
@@ -237,10 +239,10 @@
                 $.ajax({
                     url: '/shraniTest',
                     data: {
-                        nal1: $('#navodila1').text(),
-                        nal2: $('#navodila2').text(),
-                        nal3: $('#navodila3').text(),
-                        nal4: $('#navodila4').text(),
+                        nal1: angularBridge.$podatki.naloge[0].idnaloge,
+                        nal2: angularBridge.$podatki.naloge[1].idnaloge,
+                        nal3: angularBridge.$podatki.naloge[2].idnaloge,
+                        nal4: angularBridge.$podatki.naloge[3].idnaloge,
                         koda1: editor0.getValue(),
                         koda2: editor1.getValue(),
                         koda3: editor2.getValue(),
@@ -255,6 +257,43 @@
                     error: function(xhr, status, error){
                         console.log(error);
                     },
+                })
+            });
+
+            $('#oddaj').on('click', function(){
+                $.ajax({
+                    url: '/oceniTest',
+                    data: {
+                        "naloga": [
+                            angularBridge.$podatki.naloge[0].idnaloge,
+                            angularBridge.$podatki.naloge[1].idnaloge,
+                            angularBridge.$podatki.naloge[2].idnaloge,
+                            angularBridge.$podatki.naloge[3].idnaloge
+                        ],
+                        'kode': [
+                            editor0.getValue(),
+                            editor1.getValue(),
+                            editor2.getValue(),
+                            editor3.getValue()
+                        ],
+
+                        nal1: angularBridge.$podatki.naloge[0].idnaloge,
+                        nal2: angularBridge.$podatki.naloge[1].idnaloge,
+                        nal3: angularBridge.$podatki.naloge[2].idnaloge,
+                        nal4: angularBridge.$podatki.naloge[3].idnaloge,
+                        koda1: editor0.getValue(),
+                        koda2: editor1.getValue(),
+                        koda3: editor2.getValue(),
+                        koda4: editor3.getValue()
+                    },
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(data){
+                        console.log('dela!!!!!!!!!!!!');
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    }
                 })
             });
             

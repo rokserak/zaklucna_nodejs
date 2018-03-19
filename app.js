@@ -272,7 +272,6 @@ app.post('/python', function(req, res){
     if(err) {
         return console.log(err);
     }
-
     console.log("The file was saved!");
   }); 
 
@@ -333,6 +332,66 @@ app.post('/python', function(req, res){
  // window.location.href= 'htttp://localhost:3000/index.html';
 
   });
+  });
+
+
+  app.post('/oceniTest', function(req, res){
+    const con = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "usbw",
+      database: "baza"
+      });
+
+    for (i = 0; i < 4; i++) { 
+      console.log(req.body);
+      code = req.body.kode[i];
+      idji = req.body.naloga[i];
+      
+        con.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected!");
+        //console.log(document.getElementById("username").value);
+        
+        //console.log(podatki);
+        
+        con.query('SELECT * from resitve WHERE idNaloge=' + idji, function (err, result) {
+            if (err) throw err;
+            seznam1 = [result[0].vnos1, result[0].vnos2, result[0].vnos3, result[0].vnos4, result[0].vnos5];
+            seznam2 = [result[0].resitev1, result[0].resitev2, result[0].resitev3, result[0].resitev4, result[0].resitev5];
+            for(j = 0; j < 5; i++){
+              uredi = code.substring(0, code.indexOfEnd('(')) + seznam1[j] + ')';
+              console.log(uredi);
+
+              fs.writeFile("my_script.py", uredi, function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+              }); 
+            
+              PythonShell.run('my_script.py', function (err, results) {
+                if (err) throw err;
+                // results is an array consisting of messages collected during execution
+                console.log('results: %j', results);
+                if(results[0] == seznam2[j]){
+                  console.log('pravilno');
+                }else{
+                  console.log('zajebao');
+                }
+              });
+
+
+            }
+          });
+      
+
+
+
+
+
+    });
+  }
   });
 
 app.listen(3000);
