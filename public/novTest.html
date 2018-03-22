@@ -7,7 +7,7 @@
             var angularBridge = {};
             var app = angular.module("app", []);
             app.controller("demoController", function($scope, $http){
-                $http.get("http://localhost:3000/nalogeTest").then(function(data) {
+                $http.get("/nalogeTest").then(function(data) {
                     console.log('dela');
                     angularBridge.$podatki = $scope;
                     $scope.naloge = data.data;
@@ -67,8 +67,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div id="editor0">pisi!!!
-                    </div>                           
+                    <div id="editor0"></div>                           
                 </div>
                 <div class="col">
                     <button id="poslji0">run</button>
@@ -85,8 +84,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div id="editor1">pisi!!!
-                    </div>                           
+                    <div id="editor1"></div>                           
                 </div>
                 <div class="col">
                     <button id="poslji1">run</button>
@@ -103,8 +101,7 @@
                     </div>
                 <div class="row">
                     <div class="col">
-                        <div id="editor2">pisi!!!
-                        </div>                           
+                        <div id="editor2"></div>                           
                     </div>
                     <div class="col">
                         <button id="poslji2">run</button>
@@ -121,8 +118,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div id="editor3">pisi!!!
-                        </div>                           
+                        <div id="editor3"></div>                           
                     </div>
                     <div class="col">
                         <button id="poslji3">run</button>
@@ -264,19 +260,6 @@
                 $.ajax({
                     url: '/oceniTest',
                     data: {
-                        "naloga": [
-                            angularBridge.$podatki.naloge[0].idnaloge,
-                            angularBridge.$podatki.naloge[1].idnaloge,
-                            angularBridge.$podatki.naloge[2].idnaloge,
-                            angularBridge.$podatki.naloge[3].idnaloge
-                        ],
-                        'kode': [
-                            editor0.getValue(),
-                            editor1.getValue(),
-                            editor2.getValue(),
-                            editor3.getValue()
-                        ],
-
                         nal1: angularBridge.$podatki.naloge[0].idnaloge,
                         nal2: angularBridge.$podatki.naloge[1].idnaloge,
                         nal3: angularBridge.$podatki.naloge[2].idnaloge,

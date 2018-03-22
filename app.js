@@ -1,19 +1,22 @@
+
 var express = require('express');
 var app = express();
 let path = require('path');
+const async = require('async');
+var wait = require('wait.for');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug'); 
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
 var mysql = require('mysql');
 var pool = mysql.createPool({
-  host     : 'localhost',
+  host     : '127.0.0.1',
   user     : 'root',
   password : 'usbw',
   database : 'baza'
@@ -46,7 +49,7 @@ app.get('/login', function (req, res) {
 app.post('/login.html', function (req, res){
   
   const con = mysql.createConnection({
-      host: "localhost",
+      host: "127.0.0.1",
       user: "root",
       password: "usbw",
       database: "baza"
@@ -64,7 +67,7 @@ app.post('/login.html', function (req, res){
           if (err) throw err;
       console.log("1 record inserted");
   });
- // window.location.href= 'htttp://localhost:3000/index.html';
+ // window.location.href= 'htttp://127.0.0.1:3000/index.html';
 
   });
 
@@ -77,7 +80,7 @@ app.post('/login.html', function (req, res){
 app.post('/upisan.html', function (req, res){
   
   const con = mysql.createConnection({
-      host: "localhost",
+      host: "127.0.0.1",
       user: "root",
       password: "usbw",
       database: "baza"
@@ -172,9 +175,13 @@ app.get('/nalogeTest', function(req, res){
   let Naloge = [];
 
   pool.getConnection(function(err, connection) {
+    if (err){
+      console.log("error", err.message)
+       throw err;
+     }
     // Use the connection
     connection.query('SELECT * FROM naloge WHERE pike=2', function (error, results, fields) {
-      
+      if (error) throw error;
       dodaj(results);
       //console.log(results[randSt1]);
       //console.log(results[randSt2]);
@@ -184,8 +191,7 @@ app.get('/nalogeTest', function(req, res){
       connection.release();
   
       // Handle error after the release.
-      if (error) throw error;
-  
+     
       // Don't use the connection here, it has been returned to the pool.
     });
     function dodaj(res){
@@ -311,7 +317,7 @@ app.post('/python', function(req, res){
     var koda4 = req.body.koda4;
 
     const con = mysql.createConnection({
-      host: "localhost",
+      host: "127.0.0.1",
       user: "root",
       password: "usbw",
       database: "baza"
@@ -329,7 +335,7 @@ app.post('/python', function(req, res){
           if (err) throw err;
       console.log("1 record inserted");
   });
- // window.location.href= 'htttp://localhost:3000/index.html';
+ // window.location.href= 'htttp://127.0.0.1:3000/index.html';
 
   });
   });
@@ -337,60 +343,126 @@ app.post('/python', function(req, res){
 
   app.post('/oceniTest', function(req, res){
     const con = mysql.createConnection({
-      host: "localhost",
+      host: "127.0.0.1",
       user: "root",
       password: "usbw",
       database: "baza"
       });
 
-    for (i = 0; i < 4; i++) { 
-      console.log(req.body);
-      code = req.body.kode[i];
-      idji = req.body.naloga[i];
-      
-        con.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
+      var podatki = req.body;
+      var seznamID = [podatki.nal1, podatki.nal2, podatki.nal3, podatki.nal4];
+      var seznamKoda = [podatki.koda1, podatki.koda2, podatki.koda3, podatki.koda4];
+      console.log(podatki);
+      console.log('--------');
+      console.log(seznamID);
+      console.log('---------------');
+      console.log(seznamKoda);
+      console.log('-----------');
+
+    for (var i = 0; i < 4; i++) {
+        (function(i){
         //console.log(document.getElementById("username").value);
         
         //console.log(podatki);
-        
-        con.query('SELECT * from resitve WHERE idNaloge=' + idji, function (err, result) {
+        con.query('SELECT * from resitve WHERE idNaloge=' + seznamID[i], function (err, result) {
             if (err) throw err;
             seznam1 = [result[0].vnos1, result[0].vnos2, result[0].vnos3, result[0].vnos4, result[0].vnos5];
             seznam2 = [result[0].resitev1, result[0].resitev2, result[0].resitev3, result[0].resitev4, result[0].resitev5];
-            for(j = 0; j < 5; i++){
-              uredi = code.substring(0, code.indexOfEnd('(')) + seznam1[j] + ')';
-              console.log(uredi);
-
-              fs.writeFile("my_script.py", uredi, function(err) {
-                if(err) {
-                    return console.log(err);
-                }
-                console.log("The file was saved!");
-              }); 
             
-              PythonShell.run('my_script.py', function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log('results: %j', results);
-                if(results[0] == seznam2[j]){
-                  console.log('pravilno');
-                }else{
-                  console.log('zajebao');
+
+            /*
+            var r = 0;
+            function rekurzija(r){
+              if(r == 5){
+                return;
+              }else{
+                var neki = false;
+                var uredi = seznamKoda[i].substring(0, seznamKoda[i].lastIndexOf('(') + 1) + seznam1[r] + ')';
+                
+                if(neki == false){
+                  fs.writeFile("my_script.py", uredi, function(err) {
+                    if(err) {
+                        return console.log(err);
+                    }
+                    neki = true;
+                    //console.log(uredi);
+                    console.log("The file was saved!");
+                  });
+                  
                 }
-              });
+                if(neki == true){
+                  PythonShell.run('my_script.py', function (err, results) {
+                    if (err) throw err;
+                    // results is an array consisting of messages collected during execution
+                    console.log('results: ' + results);
+                    if(results + "" == seznam2[r] +""){
+                      console.log('pravilno');
+                    }else{
+                      console.log('zajebao');
+                    }
+                    console.log(seznam2[r]);
+                    neki = false;
+                  });
+                }
+                
+                r++;
+              }
+            }
+            rekurzija(r);
+            */
+            
+            for(j = 0; j < 5; j++){
+              (function(j){
+                var uredi = seznamKoda[i].substring(0, seznamKoda[i].lastIndexOf('(') + 1) + seznam1[j] + ')';
+                fs.writeFile('script' + j + '.py', uredi, function(err) {
+                    if(err) {
+                        return console.log(err);
+                    }
+                    //console.log(uredi);
+                    console.log("The file was saved!");
+                  });
+                  setTimeout(function(){
+                    PythonShell.run('script' + j + '.py', function (err, results) {
+                      if (err) throw err;
+                      // results is an array consisting of messages collected during execution
+                      results[0] = results[0].replace('\r', '');
+                      console.log(results[0]);
+                      if(results[0] == seznam2[j]){
+                        console.log('pravilno');
+                      }else{
+                        console.log('zajebao');
+                      }
+                      console.log(seznam2[j]);
+                    }); 
+                  }, 1000);
+                  
+                }
+
+                
+              //console.log(i);
+              //console.log(uredi);
+              
 
 
+               
+                  
+            
+              
+             
+
+
+            
+            )(j);
             }
           });
+          
       
 
 
 
 
 
-    });
+        })(i);
   }
   });
 

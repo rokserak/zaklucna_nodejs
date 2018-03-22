@@ -1,11 +1,11 @@
     <!doctype html>
     <html ng-app="app">
         <head>
-            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+            <script src="javascript/angular.min.js"></script>
             <script>
                 var app = angular.module("app", []);
                 app.controller("demoController", function($scope, $http){
-                    $http.get("http://localhost:3000/getNaloge").then(function(data) {
+                    $http.get("/getNaloge").then(function(data) {
                         console.log('dela');
                         $scope.naloge = data.data;
                     });
