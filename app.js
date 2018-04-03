@@ -368,48 +368,7 @@ app.post('/python', function(req, res){
             if (err) throw err;
             seznam1 = [result[0].vnos1, result[0].vnos2, result[0].vnos3, result[0].vnos4, result[0].vnos5];
             seznam2 = [result[0].resitev1, result[0].resitev2, result[0].resitev3, result[0].resitev4, result[0].resitev5];
-            
-
-            /*
-            var r = 0;
-            function rekurzija(r){
-              if(r == 5){
-                return;
-              }else{
-                var neki = false;
-                var uredi = seznamKoda[i].substring(0, seznamKoda[i].lastIndexOf('(') + 1) + seznam1[r] + ')';
-                
-                if(neki == false){
-                  fs.writeFile("my_script.py", uredi, function(err) {
-                    if(err) {
-                        return console.log(err);
-                    }
-                    neki = true;
-                    //console.log(uredi);
-                    console.log("The file was saved!");
-                  });
-                  
-                }
-                if(neki == true){
-                  PythonShell.run('my_script.py', function (err, results) {
-                    if (err) throw err;
-                    // results is an array consisting of messages collected during execution
-                    console.log('results: ' + results);
-                    if(results + "" == seznam2[r] +""){
-                      console.log('pravilno');
-                    }else{
-                      console.log('zajebao');
-                    }
-                    console.log(seznam2[r]);
-                    neki = false;
-                  });
-                }
-                
-                r++;
-              }
-            }
-            rekurzija(r);
-            */
+          
             
             for(j = 0; j < 5; j++){
               (function(j){
@@ -441,41 +400,51 @@ app.post('/python', function(req, res){
                 
               //console.log(i);
               //console.log(uredi);
-              
-
-
-               
-                  
-            
-              
-             
-
-
-            
             )(j);
             }
           });
-          
-      
-
-
-
-
-
+  
         })(i);
   }
   });
 
+app.get('/vsiDijaki', function(req, res){
+  pool.query('SELECT * FROM uporabniki', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+    res.render('dijaki', {dijaki: results });
+  });
+
+});
+
+app.get('/dijak/:id', function(req,res){
+  let id = req.params.id;
+
+  pool.query('SELECT * FROM testi1 WHERE user="' + id + '"', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+    res.render('pregledDijak', {
+      testi: results,
+      dijak: id  
+    });
+  });
+
+});
+
+app.get('/test/:id', function(req,res){
+  let id = req.params.id;
+
+  pool.query('SELECT * FROM testi1 WHERE idTesta=' + id, function (error, results, fields) {
+    if (error) throw error;
+    console.log(results);
+    res.render('pregledTest', {
+      test: results[0],
+      idT: 'test ' + id
+    });
+  });
+
+});
+
+
 app.listen(3000);
 
-/*
-connection.connect();
- 
-connection.query('UPDATE tabela SET ime="cepi"', function (error, results, fields) {
-  if (error) throw error;
-  console.log(results);
-});
- 
-connection.end();
-
-*/

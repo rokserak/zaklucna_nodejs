@@ -1,3 +1,1 @@
-def a(n):
-    print(2*n)
-a(3)
+print(7))
