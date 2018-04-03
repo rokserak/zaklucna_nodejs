@@ -15,6 +15,7 @@
             });
             
         </script>
+         <link rel="stylesheet" type="text/css" href="/CSS/meni.css">
         <style type="text/css" media="screen">
             #editor0 {
                 position: relative;
@@ -52,86 +53,160 @@
                 bottom: 0;
                 left: 0;
             }
+
+
+            .navodila{
+                background-color: #ff5bbc;
+                border-radius: 25px;
+
+
+            }
+            p{
+                background-color: #ff5bbc;
+
+            }
         </style>
     </head>
     <body ng-controller="demoController">
-        <div class="container">
+        <div class="container-fluid">
+                <div class="row">
+                        <div class="col-xl-12">
+                            <nav class="navbar navbar-expand-lg nav">
+                                    <a class="navbar-brand">Znam_py</a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                      <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                      <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                          <a class="nav-link" href="/novTest.html">Nov test <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="/adminNaloge.html">Vse naloge</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/vsiDijaki">Vsi dijaki</a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </nav>
+                                  
+                        </div>
+    
+    
+                    </div>
+
             
-            <div class="row">
-                <div class="col">
+           <br>
+                    <div class="row">
+                
+                        <div class="col-xl-2"></div>
+                <div class="col-xl-4 navodila">
                     <h3 id="navodila1">{{naloge[0].navodila}}</h3>
                 </div>
-                <div class="col">
+                <div class="col-xl-1 navodila">
                     <p>tocke: {{naloge[0].pike}}</p>
                 </div>
             </div>
+
+
+            <br>
+
+
             <div class="row">
-                <div class="col">
+                    <div class="col-xl-2"></div>
+                <div class="col-xl-4">
                     <div id="editor0"></div>                           
                 </div>
-                <div class="col">
-                    <button id="poslji0">run</button>
+                <div class="col-xl-2">
+                    <button class="btn" id="poslji0">run</button>
                     <p id="resitev0">izpis</p>
                 </div>
             </div>
+            <br>
+
             <div class="row">
-                <div class="col">
+                    <div class="col-xl-2"></div>
+                <div class="col-xl-4 navodila">
                     <h3 id="navodila2">{{naloge[1].navodila}}</h3>
                 </div>
-                <div class="col">
+                <div class="col-xl-1 navodila">
                     <p>tocke: {{naloge[1].pike}}</p>
                 </div>
             </div>
+
+            <br>
+
             <div class="row">
-                <div class="col">
+                    <div class="col-xl-2"></div>
+                <div class="col-xl-4">
                     <div id="editor1"></div>                           
                 </div>
-                <div class="col">
-                    <button id="poslji1">run</button>
+                <div class="col-xl-2">
+                    <button class="btn" id="poslji1">run</button>
                     <p id="resitev1">izpis</p>
                 </div>
             </div>
+
+            <br>
+
             <div class="row">
-                <div class="col">
+                    <div class="col-xl-2"></div>
+                <div class="col-xl-4 navodila">
                     <h3 id="navodila3">{{naloge[2].navodila}}</h3>
                 </div>
-                <div class="col">
+                <div class="col-xl-1 navodila">
                     <p>tocke: {{naloge[2].pike}}</p>
                 </div>
                     </div>
+
+                    <br>
+
                 <div class="row">
-                    <div class="col">
+                        <div class="col-xl-2"></div>
+                    <div class="col-xl-4">
                         <div id="editor2"></div>                           
                     </div>
-                    <div class="col">
-                        <button id="poslji2">run</button>
+                    <div class="col-xl-2">
+                        <button class="btn" id="poslji2">run</button>
                         <p id="resitev2">izpis</p>
                     </div>
                 </div>
+
+                <br>
+
                 <div class="row">
-                    <div class="col">
+                        <div class="col-xl-2"></div>
+                    <div class="col-xl-4 navodila">
                         <h3 id="navodila4">{{naloge[3].navodila}}</h3>
                     </div>
-                    <div class="col">
+                    <div class="col-xl-1  navodila">
                         <p>tocke: {{naloge[3].pike}}</p>
                     </div>
                 </div>
+
+                <br>
+
                 <div class="row">
-                    <div class="col">
+                        <div class="col-xl-2"></div>
+                    <div class="col-xl-4">
                         <div id="editor3"></div>                           
                     </div>
-                    <div class="col">
-                        <button id="poslji3">run</button>
+                    <div class="col-xl-2">
+                        <button class="btn" id="poslji3">run</button>
                         <p id="resitev3">izpis</p>
                     </div>
                 </div>
 
+                
+
             <div class="row my-5">
-                <div class="col">
-                    <button id="shrani">shrani</button>
+                    <div class="col-xl-2"></div>
+                <div class="col-xl-1">
+                    <button class ="btn" id="shrani">shrani</button>
                 </div>
-                <div class="col">
-                    <button id="oddaj">oddaj</button>
+                <div class="col-xl-2">
+                    <button class="btn" id="oddaj">oddaj</button>
                 </div>
             </div>
             
@@ -273,11 +348,9 @@
                     dataType: 'json',
                     success: function(data){
                         console.log('dela!!!!!!!!!!!!');
-                        
                     },
                     error: function(xhr, status, error){
                         console.log(error);
-                        
                     }
                 })
             });

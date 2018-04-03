@@ -12,44 +12,136 @@
                 });
                 
             </script>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+                <link rel="stylesheet" type="text/css" href="/CSS/meni.css">
+
         </head>
+        <style>
+                h1{
+                    color: #ff5bbc;
+            
+                }
+               
+                .sredina{
+                text-align: center;
+                
+                background-color: white;
+                
+                
+                display: flex;
+                justify-content: center;
+            
+            
+            
+            }
+            
+         
+            .stran{
+                height: 100vh;
+            
+            
+            }
+            
+            
+         
+            th{
+                text-align: center;
+
+
+            }
+            .tabela{
+                text-align: center;
+                align-self: center;
+                background-color: #ff5bbc;
+                color: black;
+            }
+            .nav{
+                background-color: #76fcfc;
+
+            }
+            
+            </style>
+
+
         <body ng-controller="demoController">
-            <table border="1">
-                <tr>
-                    <th>id
-                        <br>
-                        <input type="text" ng-model="search.idnaloge">
-                    </th>
-                    <th>navodila
-                        <br>
-                        <input type="text" ng-model="search.navodila">
-                    </th>
-                    <th>pike
-                        <br>
-                        <select ng-model="search.pike">
-                            <option value="">vse</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select> 
-                    </th>
-                    <th>vrstaNaloge
-                        <br>
-                        <select ng-model="search.tipNaloge">
-                            <option value="">vse</option>
-                            <option value="nizi">nizi</option>
-                            <option value="stevila">stevila</option>
-                            <option value="seznami">seznami</option>
-                            <option value="datoteke">datoteke</option>
-                        </select>
-                    </th>
-                </tr>
-                <tr ng-repeat="nal in naloge | filter:search">
-                    <td>{{nal.idnaloge}}</td>
-                    <td>{{nal.navodila}}</td>
-                    <td>{{nal.pike}}</td>
-                    <td>{{nal.tipNaloge}}</td>
-                </tr>
-            </table>
+                <div class="container-fluid">
+                        <div class="row">
+                                <div class="col-xl-12">
+                                    <nav class="navbar navbar-expand-lg nav">
+                                            <a class="navbar-brand">Znam_py</a>
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                              <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <div class="collapse navbar-collapse" id="navbarNav">
+                                              <ul class="navbar-nav">
+                                                <li class="nav-item active">
+                                                  <a class="nav-link" href="/novTest.html">Nov test <span class="sr-only">(current)</span></a>
+                                                </li>
+                                                <li class="nav-item">
+                                                  <a class="nav-link" href="/adminNaloge.html">Vse naloge</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/vsiDijaki">Vsi dijaki</a>
+                                                </li>
+                                              </ul>
+                                            </div>
+                                          </nav>
+                                          
+            </div>
+            
+            
+                            </div>
+
+
+
+
+                        <div class="row stran">
+                   
+                        <div class="col-xl-12 sredina">
+                            
+
+                            <table class="tabela" border="1">
+                                <tr><th colspan="4">Vse Naloge</th></tr>
+                                    <tr>
+                                        <th>id
+                                            <br>
+                                            <input type="text" ng-model="search.idnaloge">
+                                        </th>
+                                        <th>navodila
+                                            <br>
+                                            <input type="text" ng-model="search.navodila">
+                                        </th>
+                                        <th>pike
+                                            <br>
+                                            <select ng-model="search.pike">
+                                                <option value="">vse</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select> 
+                                        </th>
+                                        <th>vrstaNaloge
+                                            <br>
+                                            <select ng-model="search.tipNaloge">
+                                                <option value="">vse</option>
+                                                <option value="nizi">nizi</option>
+                                                <option value="stevila">stevila</option>
+                                                <option value="seznami">seznami</option>
+                                                <option value="datoteke">datoteke</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="nal in naloge | filter:search">
+                                        <td>{{nal.idnaloge}}</td>
+                                        <td>{{nal.navodila}}</td>
+                                        <td>{{nal.pike}}</td>
+                                        <td>{{nal.tipNaloge}}</td>
+                                    </tr>
+                                </table>
+                            
+                </div>
+                            </div>
+           
         </body>
     </html>
 

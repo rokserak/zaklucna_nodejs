@@ -6,17 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    
     <script src="test.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/CSS/meni.css">
 </head>
-<body>
-    <div class="meni">
-        <a href="/login">log in</a>
-        <a href="/">Registracija</a>
 
-    </div>
-        <div class="sredina">
+<style>
+    h1{
+        color: #ff5bbc;
+
+    }
+   
+    .sredina{
+    text-align: center;
+    
+    background-color: white;
+    padding-top: 1%;
+
+
+
+}
+
+.test{
+    background-color: #7f47cb;
+    text-align: center;
+    color: azure;
+    padding: 1%;
+    font-size: 25px;
+padding-top: 1%;
+}
+
+
+.ena{
+    background-color: #ff5bbc;
+    border-radius: 5px;
+    
+
+
+}
+
+.dve{
+    background-color: #ff5bbc;
+border-radius: 5px;
+
+}
+
+a{
+    color: white;
+}
+.slika{
+        text-align: center;
+
+    }
+
+</style>
+<body>
+        <div class="container-fluid">
+                
+            <div class="row">
+                    <div class="col-xl-12">
+                        <nav class="navbar navbar-expand-lg nav">
+                                <a class="navbar-brand" >Znam_py</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                  <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                  <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                      <a class="nav-link" href="/login">Login </a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="/">Registracija</a>
+                                    </li>
+                                   
+                                  </ul>
+                                </div>
+                              </nav>
+                              
+</div>
+
+
+                </div>
+
+
+
+        <div class="row">
+    
+        <div class="col-xl-12 sredina">
             <h1>Registracija</h1>
-                <form action="/login.html" method="POST">
+            <br>
+                <form class="sredina" action="/login.html" method="POST">
                     <div class="form-group">
                         <label >Username:</label>
                         <input type="text"name="username">
@@ -25,8 +105,18 @@
                         <label >Password</label>
                         <input type="password"  name="password">
                     </div>
-                    <input type="submit" name = "submit"value="register" />
+                    <input class="btn" type="submit" name = "submit"value="Register" />
                 </form>
+            </div>
+
+</div>
+<div class="row my-5">
+        
+        <div class="col-xl-12 slika">
+            <img src="/images/znampysvetla.png">
+    </div>
+</div>
+
             </div>
 </body>
 </html>
