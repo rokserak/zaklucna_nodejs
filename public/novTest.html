@@ -11,7 +11,55 @@
                     console.log('dela');
                     angularBridge.$podatki = $scope;
                     $scope.naloge = data.data;
+                    $scope.resitev0 = [];
+                    $scope.resitev1 = [];
+                    $scope.resitev2 = [];
+                    $scope.resitev3 = [];
                 });
+
+                $scope.run0 = function(){
+                    $http({
+                        method: 'POST',
+                        url: '/python',
+                        data: {data: editor0.getValue() }
+                        }).then(function successCallback(response) {
+                            $scope.resitev0 = response.data.data;
+                            console.log(response);
+                        });
+                }
+
+                $scope.run1 = function(){
+                    $http({
+                        method: 'POST',
+                        url: '/python',
+                        data: {data: editor1.getValue() }
+                        }).then(function successCallback(response) {
+                            $scope.resitev1 = response.data.data;
+                            console.log(response);
+                        });
+                }
+
+                $scope.run2 = function(){
+                    $http({
+                        method: 'POST',
+                        url: '/python',
+                        data: {data: editor2.getValue() }
+                        }).then(function successCallback(response) {
+                            $scope.resitev2 = response.data.data;
+                            console.log(response);
+                        });
+                }
+
+                $scope.run3 = function(){
+                    $http({
+                        method: 'POST',
+                        url: '/python',
+                        data: {data: editor3.getValue() }
+                        }).then(function successCallback(response) {
+                            $scope.resitev3 = response.data.data;
+                            console.log(response);
+                        });
+                }
             });
             
         </script>
@@ -119,8 +167,12 @@
                     <div id="editor0"></div>                           
                 </div>
                 <div class="col-xl-2">
-                    <button class="btn" id="poslji0">run</button>
-                    <p id="resitev0">izpis</p>
+                    <button class="btn" id="poslji0" ng-click="run0()">run</button>
+                    
+                    
+                        <p id="resitev0" ng-repeat="vrstica in resitev0">{{vrstica}}</p>
+                    
+
                 </div>
             </div>
             <br>
@@ -143,8 +195,10 @@
                     <div id="editor1"></div>                           
                 </div>
                 <div class="col-xl-2">
-                    <button class="btn" id="poslji1">run</button>
-                    <p id="resitev1">izpis</p>
+                        <button class="btn" id="poslji1" ng-click="run1()">run</button>
+                    
+                    
+                        <p id="resitev1" ng-repeat="vrstica in resitev1">{{vrstica}}</p>
                 </div>
             </div>
 
@@ -168,8 +222,10 @@
                         <div id="editor2"></div>                           
                     </div>
                     <div class="col-xl-2">
-                        <button class="btn" id="poslji2">run</button>
-                        <p id="resitev2">izpis</p>
+                            <button class="btn" id="poslji2" ng-click="run2()">run</button>
+                    
+                    
+                            <p id="resitev2" ng-repeat="vrstica in resitev2">{{vrstica}}</p>
                     </div>
                 </div>
 
@@ -193,8 +249,10 @@
                         <div id="editor3"></div>                           
                     </div>
                     <div class="col-xl-2">
-                        <button class="btn" id="poslji3">run</button>
-                        <p id="resitev3">izpis</p>
+                            <button class="btn" id="poslji3" ng-click="run3()">run</button>
+                    
+                    
+                            <p id="resitev3" ng-repeat="vrstica in resitev3">{{vrstica}}</p>
                     </div>
                 </div>
 
@@ -235,6 +293,10 @@
         </script>
         <script src="javascript/jquery-3.3.1.min.js"></script>
         <script>
+
+        
+
+            /*
             $('#poslji0').on('click', function(){
                 $.ajax({
                     url: '/python',
@@ -302,6 +364,8 @@
                     },
                 });
             });
+
+            */
 
 
             //shrani naloge v bazo
